@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Oxide.Plugins
 {
-    [Info("Whitelist System", "Jamie Doggins", "1.0.2")]
+    [Info("Whitelist System", "Jamie Doggins", "1.0.3")]
     [Description("Allows only whitelisted players onto the server.")]
-    public class WhitelistSystem: CovalencePlugin
+    public class WhitelistSystem : CovalencePlugin
     {
         #region Permission
         internal const string permUserWhitelisted = "whitelistsystem.whitelisted"; // To whitelist a user, add this permission to the individual. e.g. oxide.grant user [steamID] whitelistsystem.userwhitelisted.
@@ -126,7 +126,7 @@ namespace Oxide.Plugins
             }
 
             ValidCommands Command = (ValidCommands)GetCommand(args[0]);
-            if(args.Length == 1 && (Command == ValidCommands.grant || Command == ValidCommands.revoke || Command == ValidCommands.toggle))
+            if (args.Length == 1 && (Command == ValidCommands.grant || Command == ValidCommands.revoke || Command == ValidCommands.toggle))
             {
                 player.Reply(lang.GetMessage("MissingArgument", this, player.Id));
                 return;
@@ -163,10 +163,11 @@ namespace Oxide.Plugins
                         player.Reply(lang.GetMessage("NoPerm", this, player.Id));
                         return;
                     }
-                    else if (BasePlayer.FindByID(targetSteamID) != null)
+                    else if (players.FindPlayerById(args[1]) != null)
                     {
-                        BasePlayer foundPlayer = BasePlayer.FindByID(targetSteamID);
-                        foundPlayer.Kick(lang.GetMessage("RevokedKick", this, foundPlayer.UserIDString));
+                        
+                        IPlayer foundPlayer = players.FindPlayerById(args[1]);
+                        foundPlayer.Kick(lang.GetMessage("RevokedKick", this, foundPlayer.Id));
                     }
 
                     permission.RevokeUserPermission(args[1], permUserWhitelisted);
