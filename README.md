@@ -30,4 +30,4 @@
 }
 ```
 # FAQ
-1. Q: How do I whitelist myself?: A: You can whitelist yourself to the server by granting yourself the following permission `simplewhitelist.whitelisted`.
+1. Q: How do I whitelist myself?: A: You can whitelist yourself to the server by granting yourself the following permission `simplewhitelist.whitelisted` or running the following commaind in your servers console `/whitelist grant (your steamID64)`.
